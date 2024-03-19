@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovimentarPersonagem : MonoBehaviour
 {
@@ -23,7 +24,9 @@ public class MovimentarPersonagem : MonoBehaviour
     public AudioClip somPassosGrass;
     public AudioSource audioSrc;
     
-
+    private int vida = 100;
+    public Slider sliderVida;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -59,20 +62,30 @@ public class MovimentarPersonagem : MonoBehaviour
         SomPassos(x, z, estahNoChao);
     }
 
-    private void SomPassos(float eixoX, float eixoY, bool estahNoChao) {
-        if (estahNoChao && (eixoX != 0 || eixoY != 0))
+    private void SomPassos(float eixoX, float eixoY, bool estahNoChao) 
+    {
+        print(controle.velocity.magnitude);
+         // Verifica se o personagem está se movendo
+        if (controle.velocity.magnitude > 0.1f) // Ajuste 0.1f conforme necessário
         {
             if (!audioSrc.isPlaying)
             {
                 audioSrc.clip = somPassosGrass; //Passos Na grama
-                audioSrc.loop = true; 
                 audioSrc.Play();
+                print("Passo");
             }
+            
+            // Ajusta o pitch baseado na velocidade do personagem
+            // Aqui você pode ajustar os valores multiplicadores para obter o resultado desejado
+            audioSrc.pitch = 1.0f + controle.velocity.magnitude / 10.0f;
         }
         else
         {
-            audioSrc.loop = false; 
-            audioSrc.Stop();
+            // Para o som se o personagem não está se movendo
+            if (audioSrc.isPlaying)
+            {
+                audioSrc.Stop();
+            }
         }
     }
 
@@ -128,4 +141,9 @@ public class MovimentarPersonagem : MonoBehaviour
         levantarBloqueado = Physics.Raycast(cameraTransform.position, Vector3.up, out hit, 1.1f);
     }
    
+   public void AtualizarVida(int deducao)
+   {
+        vida = Mathf.CeilToInt(Mathf.Clamp(vida + deducao, 0, 100));
+        sliderVida.value = vida;
+   }
 }

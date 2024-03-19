@@ -9,6 +9,9 @@ public class InimigoComum : MonoBehaviour, ILevarDano
     private Animator anim;
     public float distanciaDoAtaque = 2.0f;
     public int vida = 50;
+    public AudioClip somMorte;
+    public AudioClip somPasso;
+    public AudioSource audioSrc;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,7 @@ public class InimigoComum : MonoBehaviour, ILevarDano
         agente = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,11 +41,13 @@ public class InimigoComum : MonoBehaviour, ILevarDano
             anim.SetTrigger("ataque");
             anim.SetBool("podeAndar", false);
             anim.SetBool("pararAtaque", false);
+            print("ataque");
             CorrigirRigidEntrar();
-        } 
+        }  
 
         if (distanciaDoPlayer >= (distanciaDoAtaque + 1)) 
         {
+            print("parar-sataque");
             anim.SetBool("pararAtaque", true);
             CorrigirRigidSair();
         }
@@ -89,8 +95,8 @@ public class InimigoComum : MonoBehaviour, ILevarDano
 
     private void Morrer() 
     {
-        // audio.clip = somMorte;
-        // audio.Play();
+        audioSrc.clip = somMorte;
+        audioSrc.Play();
 
         agente.isStopped = true;
         anim.SetBool("podeAndar", false);
@@ -98,5 +104,15 @@ public class InimigoComum : MonoBehaviour, ILevarDano
         anim.SetBool("morreu", true);
 
         this.enabled = false;
+    }
+
+    public void DarDano() 
+    {
+        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
+            }
+
+    public void Passo() 
+    {
+        audioSrc.PlayOneShot(somPasso, 0.5f); // O segundo parâmetro identifica o volume do som
     }
 }
