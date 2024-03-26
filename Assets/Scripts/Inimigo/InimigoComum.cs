@@ -13,6 +13,9 @@ public class InimigoComum : MonoBehaviour, ILevarDano
     public AudioClip somPasso;
     public AudioSource audioSrc;
 
+    private FieldOfView fov;
+    private PatrulharAleatorio pal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +23,27 @@ public class InimigoComum : MonoBehaviour, ILevarDano
         player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
         audioSrc = GetComponent<AudioSource>();
+
+        fov = GetComponent<FieldOfView>();
+        pal = GetComponent<PatrulharAleatorio>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        VaiAtrasJogador();
         OlharParaJogador(); 
         VerificaVida();
+
+        if (fov.podeVerPlayer) 
+        {
+            VaiAtrasJogador();
+        } else 
+        {
+            anim.SetBool("pararAtaque", true);
+            CorrigirRigidSair();
+            agente.isStopped = false;
+            pal.Andar();
+        }
     }
 
     private void VaiAtrasJogador() 
@@ -36,8 +52,6 @@ public class InimigoComum : MonoBehaviour, ILevarDano
         if (distanciaDoPlayer < distanciaDoAtaque) 
         {
             agente.isStopped = true;
-            Debug.Log("Ataque");
-
             anim.SetTrigger("ataque");
             anim.SetBool("podeAndar", false);
             anim.SetBool("pararAtaque", false);
@@ -47,7 +61,7 @@ public class InimigoComum : MonoBehaviour, ILevarDano
 
         if (distanciaDoPlayer >= (distanciaDoAtaque + 1)) 
         {
-            print("parar-sataque");
+            //print("parar-ataque");
             anim.SetBool("pararAtaque", true);
             CorrigirRigidSair();
         }
@@ -109,7 +123,8 @@ public class InimigoComum : MonoBehaviour, ILevarDano
     public void DarDano() 
     {
         player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
-            }
+        print("dar dano");
+    }
 
     public void Passo() 
     {

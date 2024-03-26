@@ -13,6 +13,10 @@ public class InimigoBoss : MonoBehaviour, ILevarDano
     public AudioClip somPasso;
     public AudioSource audioSrc;
 
+    private FieldOfView fov;
+    private PatrulharAleatorio pal;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +24,26 @@ public class InimigoBoss : MonoBehaviour, ILevarDano
         player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
         audioSrc = GetComponent<AudioSource>();
+        fov = GetComponent<FieldOfView>();
+        pal = GetComponent<PatrulharAleatorio>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        VaiAtrasJogador();
         OlharParaJogador(); 
         VerificaVida();
+
+        if (fov.podeVerPlayer) 
+        {
+            VaiAtrasJogador();
+        } else 
+        {
+            anim.SetBool("pararAtaque", true);
+            CorrigirRigidSair();
+            agente.isStopped = false;
+            pal.Andar();
+        }
     }
 
     private void VaiAtrasJogador() 
@@ -108,7 +124,7 @@ public class InimigoBoss : MonoBehaviour, ILevarDano
     public void DarDano() 
     {
         player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
-            }
+    }
 
     public void Passo() 
     {
