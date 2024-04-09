@@ -15,6 +15,13 @@ public class FieldOfViewEditor : Editor
         Handles.color = Color.yellow;
         Handles.DrawLine(fov.transform.position, fov.transform.position + ang01 * fov.distanciaVisao);
         Handles.DrawLine(fov.transform.position, fov.transform.position + ang02 * fov.distanciaVisao);
+
+        if (fov.podeVerPlayer) 
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Handles.color = Color.green;
+            Handles.DrawLine(fov.transform.position, player.transform.position);
+        }
     }
 
     private Vector3 DirDadoAngulo(float eulerY, float anguloEmGraus) 

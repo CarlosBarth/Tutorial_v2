@@ -30,7 +30,7 @@ public class PatrulharAleatorio : MonoBehaviour
         return false;
     }
 
-    public void Andar() 
+    public void Andar(Animator anim = null) 
     {
         if (agent.remainingDistance <= agent.stoppingDistance || (tempo >= 6.0f))
         {
@@ -39,11 +39,31 @@ public class PatrulharAleatorio : MonoBehaviour
             {
                 agent.SetDestination(point);
                 tempo = 0;
+                // print("run?");
+                // print(!anim.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"));
+                // if (anim &&  !anim.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"))
+                // {
+                    anim.SetBool("podeAndar", true);
+                    agent.isStopped = false;
+                // }
             }
         } else 
         {
+            
+            if (agent.remainingDistance <= 1) {
+                anim.SetBool("podeAndar", false);
+                agent.isStopped = true;
+                print("parado");
+            }
             tempo += Time.deltaTime;
+            // if (anim && ! anim.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            // {
+            //     print("idle");
+                // anim.Play("idle");
+                
+            // }         
         }
         Debug.DrawLine(transform.position, agent.destination, Color.magenta);
     }
+
 }

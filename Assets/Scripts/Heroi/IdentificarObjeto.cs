@@ -29,7 +29,7 @@ public class IdentificarObjetos : MonoBehaviour
             if (Physics.SphereCast(transform.position, 0.1f, transform.TransformDirection(Vector3.forward), out hit, 5))
             {
                 distanciaAlvo = hit.distance;
-                print("Tag - " + hit.transform.gameObject.tag);
+                //print("Tag - " + hit.transform.gameObject.tag);
 
                 
                 if (objAlvo != null && hit.transform.gameObject != objAlvo)
@@ -44,7 +44,7 @@ public class IdentificarObjetos : MonoBehaviour
                 {
                     objArrastar = hit.transform.gameObject;
                     objAlvo = objArrastar;
-                    print("Arrastar" + objArrastar);
+                    //print("Arrastar" + objArrastar);
                     textoTecla.color = new Color(248 / 255f, 248 / 255f, 13 / 255f);
                     textoMsg.color = textoTecla.color;
                     textoTecla.text = "[F]";
@@ -55,7 +55,7 @@ public class IdentificarObjetos : MonoBehaviour
                 {
                     objPegar = hit.transform.gameObject;
                     objAlvo = objPegar;
-                    print("Pegar - " + objPegar);
+                    //print("Pegar - " + objPegar);
 
                     textoTecla.color = new Color(51 / 255f, 1, 0);
                     textoMsg.color = textoTecla.color;

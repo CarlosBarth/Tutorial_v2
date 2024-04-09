@@ -1,25 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class InimigoComum : MonoBehaviour, ILevarDano
+public class InimigoComum : InimigoBase, ILevarDano
 {
-    private UnityEngine.AI.NavMeshAgent agente;
-    private GameObject player;
-    private Animator anim;
-    public float distanciaDoAtaque = 2.0f;
-    public int vida = 50;
-    public AudioClip somMorte;
-    public AudioClip somPasso;
-    public AudioSource audioSrc;
-
-    private FieldOfView fov;
-    private PatrulharAleatorio pal;
+      
 
     // Start is called before the first frame update
     void Start()
     {
-        agente = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agente = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
         audioSrc = GetComponent<AudioSource>();
@@ -37,37 +28,59 @@ public class InimigoComum : MonoBehaviour, ILevarDano
         if (fov.podeVerPlayer) 
         {
             VaiAtrasJogador();
+                        
         } else 
         {
             anim.SetBool("pararAtaque", true);
             CorrigirRigidSair();
             agente.isStopped = false;
-            pal.Andar();
+            pal.Andar(anim);
+            
         }
+    }
+
+    IEnumerator WaitForAnimation(string animationName)
+    {
+        // print("iterator");
+        // Aguarda até que a animação esteja sendo reproduzida
+        while (!anim.GetCurrentAnimatorStateInfo(0).IsName(animationName))
+        {
+            yield return null;
+        }
+
+        // Agora, espera a animação terminar
+        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animationLength);
+        
+        // Aqui a animação terminou, mover o NPC em direção ao jogador
+        // print("foi atras");
+        VaiAtrasJogador();
     }
 
     private void VaiAtrasJogador() 
     {
         float distanciaDoPlayer = Vector3.Distance(transform.position, player.transform.position);
+        // print(distanciaDoPlayer);
         if (distanciaDoPlayer < distanciaDoAtaque) 
         {
             agente.isStopped = true;
             anim.SetTrigger("ataque");
             anim.SetBool("podeAndar", false);
             anim.SetBool("pararAtaque", false);
-            print("ataque");
+           
             CorrigirRigidEntrar();
         }  
 
         if (distanciaDoPlayer >= (distanciaDoAtaque + 1)) 
         {
-            //print("parar-ataque");
+            // print("parar-ataque");
             anim.SetBool("pararAtaque", true);
             CorrigirRigidSair();
         }
 
         if (anim.GetBool("podeAndar"))
         {
+            // print("get destination");
             agente.isStopped = false;
             agente.SetDestination(player.transform.position);
             anim.ResetTrigger("ataque");
@@ -123,11 +136,12 @@ public class InimigoComum : MonoBehaviour, ILevarDano
     public void DarDano() 
     {
         player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
-        print("dar dano");
+                
     }
 
     public void Passo() 
     {
         audioSrc.PlayOneShot(somPasso, 0.5f); // O segundo parâmetro identifica o volume do som
     }
+
 }

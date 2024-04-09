@@ -64,7 +64,7 @@ public class MovimentarPersonagem : MonoBehaviour
 
     private void SomPassos(float eixoX, float eixoY, bool estahNoChao) 
     {
-        print(controle.velocity.magnitude);
+//        print(controle.velocity.magnitude);
          // Verifica se o personagem está se movendo
         if (controle.velocity.magnitude > 0.1f) // Ajuste 0.1f conforme necessário
         {
@@ -72,7 +72,6 @@ public class MovimentarPersonagem : MonoBehaviour
             {
                 audioSrc.clip = somPassosGrass; //Passos Na grama
                 audioSrc.Play();
-                print("Passo");
             }
             
             // Ajusta o pitch baseado na velocidade do personagem

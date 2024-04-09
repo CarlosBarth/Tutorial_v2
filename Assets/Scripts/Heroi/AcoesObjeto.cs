@@ -18,7 +18,7 @@ public class AcoesObjeto : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && idObjetos.GetObjPegar() != null)
         {
-            print("Update - Pegar");
+            //print("Update - Pegar");
             Pegar();
         }
 
@@ -28,12 +28,12 @@ public class AcoesObjeto : MonoBehaviour
             if (!pegou)
             {
                 Arrastar();
-                print("Arrastar");
+                //print("Arrastar");
             }
             else
             {
                 Soltar();
-                print("Soltar");
+                //print("Soltar");
             }
             pegou = !pegou;
         }

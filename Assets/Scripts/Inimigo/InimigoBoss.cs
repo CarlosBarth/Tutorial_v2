@@ -36,6 +36,7 @@ public class InimigoBoss : MonoBehaviour, ILevarDano
 
         if (fov.podeVerPlayer) 
         {
+            anim.SetTrigger("roar");
             VaiAtrasJogador();
         } else 
         {

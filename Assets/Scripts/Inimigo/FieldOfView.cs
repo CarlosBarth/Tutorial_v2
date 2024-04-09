@@ -25,9 +25,12 @@ public class FieldOfView : MonoBehaviour
 
     private void OlharParaJogador()
     {
-        Vector3 direcaoOlhar = player.transform.position - transform.position;
-        Quaternion rotacao = Quaternion.LookRotation(direcaoOlhar);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotacao, Time.deltaTime * 300);
+        if (this.enabled)
+        {
+            Vector3 direcaoOlhar = player.transform.position - transform.position;
+            Quaternion rotacao = Quaternion.LookRotation(direcaoOlhar);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotacao, Time.deltaTime * 300);
+        }
     }
 
     private void ProcurarPlayerVisivel()
@@ -36,7 +39,7 @@ public class FieldOfView : MonoBehaviour
 
         foreach (Collider alvo in alvosDentroRaio) 
         {
-            if (alvo.gameObject == player) 
+            if (alvo.gameObject == player && this.enabled) 
             {
                 Vector3 dirToAlvo = (alvo.transform.position - transform.position).normalized;
                 dirToAlvo.y = 0;
