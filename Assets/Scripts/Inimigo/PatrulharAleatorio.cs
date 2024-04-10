@@ -53,7 +53,7 @@ public class PatrulharAleatorio : MonoBehaviour
             if (agent.remainingDistance <= 1) {
                 anim.SetBool("podeAndar", false);
                 agent.isStopped = true;
-                print("parado");
+                // print("parado");
             }
             tempo += Time.deltaTime;
             // if (anim && ! anim.GetCurrentAnimatorStateInfo(0).IsName("idle"))

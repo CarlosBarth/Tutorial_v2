@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MovimentarPersonagem : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class MovimentarPersonagem : MonoBehaviour
     
     private int vida = 100;
     public Slider sliderVida;
+    public GameObject telaFimJogo;
+    public bool estahVivo = true;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,17 @@ public class MovimentarPersonagem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!estahVivo) 
+        {
+            return;
+        }
+
+        if (vida <= 0) 
+        {
+            FimDeJogo();
+            return;
+        }
+
         Mover();
         Pular();
         Agachar();       
@@ -144,5 +158,33 @@ public class MovimentarPersonagem : MonoBehaviour
    {
         vida = Mathf.CeilToInt(Mathf.Clamp(vida + deducao, 0, 100));
         sliderVida.value = vida;
+   }
+
+   private void FimDeJogo ()
+   {
+    // Vai de 0 a 1
+    // 1 velocidade normal
+    // entre 0 e 1 possivel configurar camera lenta
+    Time.timeScale = 0;
+    Camera.main.GetComponent<AudioListener>().enabled = false;
+    GetComponentInChildren<Glock>().enabled = false;
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+
+    telaFimJogo.SetActive(true);
+
+    estahVivo = false;
+   }
+
+   public void ReiniciarJogo() 
+   {
+        Time.timeScale = 1;
+        print("click");
+        SceneManager.LoadScene(0);
+   }
+
+   public void SairJogo() 
+   {
+        Application.Quit();
    }
 }

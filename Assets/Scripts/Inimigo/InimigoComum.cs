@@ -133,15 +133,4 @@ public class InimigoComum : InimigoBase, ILevarDano
         this.enabled = false;
     }
 
-    public void DarDano() 
-    {
-        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
-                
-    }
-
-    public void Passo() 
-    {
-        audioSrc.PlayOneShot(somPasso, 0.5f); // O segundo parâmetro identifica o volume do som
-    }
-
 }
