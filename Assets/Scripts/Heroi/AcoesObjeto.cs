@@ -43,6 +43,7 @@ public class AcoesObjeto : MonoBehaviour
     private void Pegar()
     {
         IPegavel obj = idObjetos.GetObjPegar().GetComponent<IPegavel>();
+        print(idObjetos.GetObjPegar().name);
         if (obj != null) {
             obj.Pegar();
         }

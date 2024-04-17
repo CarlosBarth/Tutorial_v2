@@ -6,22 +6,19 @@ using UnityEngine.AI;
 public class InimigoComum : InimigoBase, ILevarDano
 {
       
-
-    // Start is called before the first frame update
-    void Start()
+    public override bool IsBoss() 
     {
-        agente = GetComponent<NavMeshAgent>();
-        player = GameObject.FindWithTag("Player");
-        anim = GetComponent<Animator>();
-        audioSrc = GetComponent<AudioSource>();
-
-        fov = GetComponent<FieldOfView>();
-        pal = GetComponent<PatrulharAleatorio>();
-    }
+        return false;
+    } 
 
     // Update is called once per frame
     void Update()
     {
+        tempoAcumulado += Time.deltaTime;
+        if (tempoAcumulado >= intervalo) {
+            ColocarOvo(); // isso mesmo, um ovo!
+            tempoAcumulado = 0f; // Resetar o contador
+        }
         OlharParaJogador(); 
         VerificaVida();
 
@@ -37,6 +34,13 @@ public class InimigoComum : InimigoBase, ILevarDano
             pal.Andar(anim);
             
         }
+    }
+    
+    void ColocarOvo() {
+        Debug.Log("Póhh");
+        WaitForAnimation("colocarOvo");
+        // Código para a ação aqui
+        Debug.Log("Póhh póóóh");
     }
 
     IEnumerator WaitForAnimation(string animationName)
@@ -120,17 +124,17 @@ public class InimigoComum : InimigoBase, ILevarDano
         }
     }
 
-    private void Morrer() 
+    protected virtual void Morrer() 
     {
-        audioSrc.clip = somMorte;
-        audioSrc.Play();
-
-        agente.isStopped = true;
-        anim.SetBool("podeAndar", false);
-        anim.SetBool("pararAtaque", true);
-        anim.SetBool("morreu", true);
-
-        this.enabled = false;
+        base.Morrer();
+        countEnemyTemple++;
+        
+        if (countEnemyTemple >= 1) 
+        {
+            AbrirPortaBoss();
+            mensagemTemporaria.MostrarMensagem("Uma porta foi destrancada!");
+        } 
+        AtualizaPontuacao(10);
     }
 
 }

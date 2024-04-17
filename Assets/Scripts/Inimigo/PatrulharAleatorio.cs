@@ -32,38 +32,41 @@ public class PatrulharAleatorio : MonoBehaviour
 
     public void Andar(Animator anim = null) 
     {
-        if (agent.remainingDistance <= agent.stoppingDistance || (tempo >= 6.0f))
-        {
-            Vector3 point;
-            if (RandomPoint(transform.position, range, out point))
+        if(agent) {
+            if (agent.remainingDistance <= agent.stoppingDistance || (tempo >= 6.0f))
             {
-                agent.SetDestination(point);
-                tempo = 0;
-                // print("run?");
-                // print(!anim.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"));
-                // if (anim &&  !anim.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"))
-                // {
-                    anim.SetBool("podeAndar", true);
+                Vector3 point;
+                if (RandomPoint(transform.position, range, out point))
+                {
+                    agent.SetDestination(point);
+                    tempo = 0;
+                    // print("run?");
+                    // print(!anim.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"));
+                    if (anim)
+                    {
+                        anim.SetBool("podeAndar", true);
+                    }    
                     agent.isStopped = false;
-                // }
-            }
-        } else 
-        {
-            
-            if (agent.remainingDistance <= 1) {
-                anim.SetBool("podeAndar", false);
-                agent.isStopped = true;
-                // print("parado");
-            }
-            tempo += Time.deltaTime;
-            // if (anim && ! anim.GetCurrentAnimatorStateInfo(0).IsName("idle"))
-            // {
-            //     print("idle");
-                // anim.Play("idle");
+                }
+            } else 
+            {
                 
-            // }         
+                if (agent.remainingDistance <= 1) {
+                    anim.SetBool("podeAndar", false);
+                    agent.isStopped = true;
+                    // print("parado");
+                }
+                tempo += Time.deltaTime;
+                // if (anim)
+                // {
+                //     print("idle");
+                    // anim.Play("idle");
+                    
+                // }         
+            }
+            Debug.DrawLine(transform.position, agent.destination, Color.magenta);
         }
-        Debug.DrawLine(transform.position, agent.destination, Color.magenta);
+        
     }
 
 }

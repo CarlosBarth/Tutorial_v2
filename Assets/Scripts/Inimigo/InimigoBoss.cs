@@ -2,31 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InimigoBoss : MonoBehaviour, ILevarDano
+public class InimigoBoss : InimigoBase, ILevarDano
 {
-    private UnityEngine.AI.NavMeshAgent agente;
-    private GameObject player;
-    private Animator anim;
-    public float distanciaDoAtaque = 2.0f;
-    public int vida = 50;
-    public AudioClip somMorte;
-    public AudioClip somPasso;
-    public AudioSource audioSrc;
-
-    private FieldOfView fov;
-    private PatrulharAleatorio pal;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public override bool IsBoss() 
     {
-        agente = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        player = GameObject.FindWithTag("Player");
-        anim = GetComponent<Animator>();
-        audioSrc = GetComponent<AudioSource>();
-        fov = GetComponent<FieldOfView>();
-        pal = GetComponent<PatrulharAleatorio>();
-    }
+        return true;
+    } 
 
     // Update is called once per frame
     void Update()
@@ -43,7 +24,7 @@ public class InimigoBoss : MonoBehaviour, ILevarDano
             anim.SetBool("pararAtaque", true);
             CorrigirRigidSair();
             agente.isStopped = false;
-            pal.Andar();
+            pal.Andar(anim);
         }
     }
 
@@ -109,17 +90,14 @@ public class InimigoBoss : MonoBehaviour, ILevarDano
         }
     }
 
-    private void Morrer() 
+    protected override void Morrer() 
     {
-        audioSrc.clip = somMorte;
-        audioSrc.Play();
-
-        agente.isStopped = true;
-        anim.SetBool("podeAndar", false);
-        anim.SetBool("pararAtaque", true);
-        anim.SetBool("morreu", true);
-
-        this.enabled = false;
+        base.Morrer();
+        AtualizaPontuacao(30);
+        print(this.name);
+        if (this.name == "TempleBoss") {
+            AbrirPortas();
+        }
     }
 
     public void DarDano() 

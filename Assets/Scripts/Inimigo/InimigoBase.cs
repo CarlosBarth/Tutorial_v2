@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
-public class InimigoBase : MonoBehaviour, ILevarDano
+public abstract class InimigoBase : MonoBehaviour, ILevarDano
 {
     protected NavMeshAgent agente;
     protected GameObject player;
@@ -21,11 +22,31 @@ public class InimigoBase : MonoBehaviour, ILevarDano
     protected PatrulharAleatorio pal;
 
     public bool jahGrunhiu = false;
+    public Text textoPontuacao;
+
+    protected float tempoAcumulado = 0f;
+    protected float intervalo = 20f;
+    protected int countEnemyTemple = 0;
+    protected MensagemTemporaria mensagemTemporaria;
     
+    public abstract bool IsBoss();
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject canvas = GameObject.Find("Canvas");
+        if (canvas != null)
+        {
+            mensagemTemporaria = canvas.GetComponent<MensagemTemporaria>();
+            if (mensagemTemporaria == null)
+            {
+                Debug.LogError("Não foi possível encontrar o componente MensagemTemporaria no Canvas.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Não foi possível encontrar um objeto Canvas com o nome especificado.");
+        }
         agente = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
@@ -173,6 +194,9 @@ public class InimigoBase : MonoBehaviour, ILevarDano
 
     public void LevarDano(int dano) 
     {
+        if (agente.enabled != true) {
+            return;
+        }
         vida-= dano;
         agente.isStopped = true;
         anim.SetTrigger("levouTiro");
@@ -181,11 +205,12 @@ public class InimigoBase : MonoBehaviour, ILevarDano
         if (this.enabled) 
         {
             VaiAtrasJogador();
+            print(this.name);
         }
         
     }
 
-    private void Morrer() 
+    protected virtual void Morrer() 
     {
         audioSrc.clip = somMorte;
         audioSrc.Play();
@@ -197,8 +222,44 @@ public class InimigoBase : MonoBehaviour, ILevarDano
         anim.SetBool("dead", true);
         this.enabled = false;
         fov.enabled = false;
-        GameObject.Destroy(agente, 10);
+        GameObject.Destroy(this, 5);
+               
     }
+
+    protected void AtualizaPontuacao(int valor)
+    {
+        int pontuacaoAtual = int.Parse(textoPontuacao.text);
+        int pontuacao = Mathf.CeilToInt(Mathf.Clamp(pontuacaoAtual + valor, 0,9999));
+        textoPontuacao.text = pontuacao.ToString();
+    }
+
+    public void AbrirPortaBoss() 
+    {
+        GameObject porta = GameObject.FindWithTag("PortaBoss");
+        if (porta != null) {
+            porta.GetComponent<SunTemple.Door>().Destrancar();
+        }
+    }
+
+    public void AbrirPortas() 
+    {
+        bool abriuPortas = false;
+        GameObject[] portas = GameObject.FindGameObjectsWithTag("Porta");
+        foreach (GameObject porta in portas)
+        {
+            if (porta != null) {
+                abriuPortas = true;
+                porta.GetComponent<SunTemple.Door>().Destrancar();
+            }
+        }
+
+        if (abriuPortas) 
+        {
+            mensagemTemporaria.MostrarMensagem("As portas da Catedral foram destrancadas!");
+        }
+    }
+   
+
 
     public void DarDano() 
     {

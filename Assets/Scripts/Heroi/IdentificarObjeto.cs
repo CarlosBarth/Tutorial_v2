@@ -53,14 +53,20 @@ public class IdentificarObjetos : MonoBehaviour
                 
                 if (hit.transform.gameObject.tag == "Pegar")
                 {
+                    print(hit.transform.gameObject.name);
                     objPegar = hit.transform.gameObject;
                     objAlvo = objPegar;
-                    //print("Pegar - " + objPegar);
+                    // print("Pegar - " + objPegar.name);
 
                     textoTecla.color = new Color(51 / 255f, 1, 0);
                     textoMsg.color = textoTecla.color;
                     textoTecla.text = "[F]";
                     textoMsg.text = "Pegar";
+
+                    if (hit.transform.gameObject.name == "Vida")
+                    {
+                        textoMsg.text += " Vida";
+                    }
                 }
 
                 if (objAlvo != null)

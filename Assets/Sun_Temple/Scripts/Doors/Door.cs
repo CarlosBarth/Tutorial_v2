@@ -184,5 +184,10 @@ namespace SunTemple
             Rotating = true;
         }
 
+		public void Destrancar() 
+		{
+			IsLocked = false;
+		}
+
     }
 }

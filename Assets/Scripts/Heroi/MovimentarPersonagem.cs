@@ -27,8 +27,8 @@ public class MovimentarPersonagem : MonoBehaviour
     
     private int vida = 100;
     public Slider sliderVida;
-    public GameObject telaFimJogo;
-    public bool estahVivo = true;
+    public Text textoVida;
+
     
     // Start is called before the first frame update
     void Start()
@@ -41,11 +41,6 @@ public class MovimentarPersonagem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!estahVivo) 
-        {
-            return;
-        }
-
         if (vida <= 0) 
         {
             FimDeJogo();
@@ -154,10 +149,13 @@ public class MovimentarPersonagem : MonoBehaviour
         levantarBloqueado = Physics.Raycast(cameraTransform.position, Vector3.up, out hit, 1.1f);
     }
    
-   public void AtualizarVida(int deducao)
+   public void AtualizarVida(int valor)
    {
-        vida = Mathf.CeilToInt(Mathf.Clamp(vida + deducao, 0, 100));
+        // print("vida - " + vida);
+        // print("valor - " + valor);
+        vida = Mathf.CeilToInt(Mathf.Clamp(vida + valor, 0, 100));
         sliderVida.value = vida;
+        textoVida.text = $"{vida}";
    }
 
    private void FimDeJogo ()
@@ -165,26 +163,13 @@ public class MovimentarPersonagem : MonoBehaviour
     // Vai de 0 a 1
     // 1 velocidade normal
     // entre 0 e 1 possivel configurar camera lenta
-    Time.timeScale = 0;
-    Camera.main.GetComponent<AudioListener>().enabled = false;
-    GetComponentInChildren<Glock>().enabled = false;
+    // Time.timeScale = 0;
+    // Camera.main.GetComponent<AudioListener>().enabled = false;
+    // GetComponentInChildren<Glock>().enabled = false;
     Cursor.lockState = CursorLockMode.None;
     Cursor.visible = true;
+    SceneManager.LoadScene(0);
+    // telaFimJogo.SetActive(true);
+    }
 
-    telaFimJogo.SetActive(true);
-
-    estahVivo = false;
-   }
-
-   public void ReiniciarJogo() 
-   {
-        Time.timeScale = 1;
-        print("click");
-        SceneManager.LoadScene(0);
-   }
-
-   public void SairJogo() 
-   {
-        Application.Quit();
-   }
 }
