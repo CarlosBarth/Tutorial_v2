@@ -234,12 +234,26 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
     }
 
     public void AbrirPortaBoss() 
-    {
-        GameObject porta = GameObject.FindWithTag("PortaBoss");
-        if (porta != null) {
-            porta.GetComponent<SunTemple.Door>().Destrancar();
+{
+    GameObject porta = GameObject.FindWithTag("PortaBoss");
+    if (porta != null) {
+        // Destrancar a porta
+        porta.GetComponent<SunTemple.Door>().Destrancar();
+        
+        // Adicionar um outline à porta
+        Outline outline = porta.GetComponent<Outline>();
+        if (outline != null) {
+            outline.OutlineWidth = 5f;
+        }
+
+        // Tocar o som do AudioSource(destrancar)
+        AudioSource audioSource = porta.GetComponent<AudioSource>();
+        if (audioSource != null) {
+            audioSource.Play();
         }
     }
+}
+
 
     public void AbrirPortas() 
     {
@@ -250,6 +264,10 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
             if (porta != null) {
                 abriuPortas = true;
                 porta.GetComponent<SunTemple.Door>().Destrancar();
+                if (porta.GetComponent<Outline>()) 
+                {
+                    porta.GetComponent<Outline>().OutlineWidth = 5f;
+                }
             }
         }
 
@@ -281,4 +299,5 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
     {
         audioSrc.PlayOneShot(somKick, 0.5f); // O segundo parâmetro identifica o volume do som
     }
+
 }
