@@ -223,6 +223,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         this.enabled = false;
         fov.enabled = false;
         GameObject.Destroy(this, 5);
+        GameObject.Destroy(agente, 5);
                
     }
 
