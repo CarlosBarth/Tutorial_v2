@@ -39,7 +39,7 @@ public class FieldOfView : MonoBehaviour
 
         foreach (Collider alvo in alvosDentroRaio) 
         {
-            if (alvo.gameObject == player && this.enabled) 
+            if (alvo.gameObject == player) 
             {
                 Vector3 dirToAlvo = (alvo.transform.position - transform.position).normalized;
                 dirToAlvo.y = 0;

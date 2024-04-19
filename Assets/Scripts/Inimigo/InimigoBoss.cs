@@ -102,7 +102,7 @@ public class InimigoBoss : InimigoBase, ILevarDano
 
     public void DarDano() 
     {
-        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
+        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-20);
     }
 
     public void Passo() 

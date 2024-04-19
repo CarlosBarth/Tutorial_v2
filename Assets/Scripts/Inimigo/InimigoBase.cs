@@ -57,6 +57,15 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         pal = GetComponent<PatrulharAleatorio>();
     }
 
+    protected void VerificaVida() 
+    {
+        if (vida <= 0) 
+        {
+            // print("Faleceu");
+            Morrer();
+        }
+    }
+
     // Update is called once per framessssss
     void Update()
     {       
@@ -67,10 +76,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
             return;
         }
 
-        if (vida <= 0) 
-        {
-            Morrer();
-        }         
+        VerificaVida();        
                 
         // StartCoroutine(WaitForAnimation("hit"));
         if (fov.podeVerPlayer) 
@@ -95,12 +101,12 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         //     anim.ResetTrigger("roar");
             anim.SetBool("pararAtaque", true);
             CorrigirRigidSair();
-            // agente.isStopped = false;
+            agente.isStopped = false;
             pal.Andar(anim);
         }
     }
 
-    IEnumerator WaitForAnimation(string animationName, int adcTime = 0)
+    public IEnumerator WaitForAnimation(string animationName, int adcTime = 0)
     {
         // Aguarda até que a animação esteja sendo reproduzida
         while (!anim.GetCurrentAnimatorStateInfo(0).IsName(animationName))
@@ -111,10 +117,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         // Agora, espera a animação terminar
         float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
         float length = (animationLength + adcTime);
-        print(animationName);
-        print(length);
-        print(Time.deltaTime);
-        
+                
         yield return new WaitForSeconds(length);
         
         // Aqui a animação terminou, mover o NPC em direção ao jogador
@@ -174,8 +177,8 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
 
     private void OlharParaJogador()
     {
-        print("olhar");
-        if (this.enabled) 
+        // print("olhar");
+        if (this.enabled && !agente.isStopped) 
         {
             Vector3 direcaoOlhar = player.transform.position - transform.position;
             Quaternion rotacao = Quaternion.LookRotation(direcaoOlhar);
@@ -206,7 +209,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         if (this.enabled) 
         {
             VaiAtrasJogador();
-            print(this.name);
+            // print(this.name);
         }
         
     }
@@ -222,7 +225,8 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         anim.SetBool("morreu", true);
         anim.SetBool("dead", true);
         this.enabled = false;
-        fov.enabled = false;
+        // agente.enabled = false;
+        // // fov.enabled = false;
         GameObject.Destroy(this, 5);
         GameObject.Destroy(agente, 5);
                
@@ -285,7 +289,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
 
     public void DarDano() 
     {
-        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-100);
+        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
         
     }
 
