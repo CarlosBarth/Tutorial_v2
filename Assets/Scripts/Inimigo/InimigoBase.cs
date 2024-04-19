@@ -23,6 +23,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
 
     public bool jahGrunhiu = false;
     public Text textoPontuacao;
+    public Text textoPontuacaoFinal;
 
     protected float tempoAcumulado = 0f;
     protected float intervalo = 20f;
@@ -232,6 +233,8 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         int pontuacaoAtual = int.Parse(textoPontuacao.text);
         int pontuacao = Mathf.CeilToInt(Mathf.Clamp(pontuacaoAtual + valor, 0,9999));
         textoPontuacao.text = pontuacao.ToString();
+        string descricaoPontos = "Sua Pontuação foi de: " +  pontuacao.ToString() + " Pontos.";
+        textoPontuacaoFinal.text = descricaoPontos;
     }
 
     public void AbrirPortaBoss() 
@@ -282,7 +285,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
 
     public void DarDano() 
     {
-        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-10);
+        player.GetComponent<MovimentarPersonagem>().AtualizarVida(-100);
         
     }
 

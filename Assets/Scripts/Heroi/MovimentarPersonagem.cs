@@ -28,6 +28,9 @@ public class MovimentarPersonagem : MonoBehaviour
     private int vida = 100;
     public Slider sliderVida;
     public Text textoVida;
+    public GameObject telaFimJogo;
+    
+    public Text textoPontuacaoFinal;
 
     
     // Start is called before the first frame update
@@ -160,16 +163,15 @@ public class MovimentarPersonagem : MonoBehaviour
 
    private void FimDeJogo ()
    {
-    // Vai de 0 a 1
-    // 1 velocidade normal
-    // entre 0 e 1 possivel configurar camera lenta
-    // Time.timeScale = 0;
-    // Camera.main.GetComponent<AudioListener>().enabled = false;
-    // GetComponentInChildren<Glock>().enabled = false;
-    Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
-    SceneManager.LoadScene(0);
-    // telaFimJogo.SetActive(true);
+        // Vai de 0 a 1
+        // 1 velocidade normal
+        // entre 0 e 1 possivel configurar camera lenta
+        // Time.timeScale = 0;
+        // Camera.main.GetComponent<AudioListener>().enabled = false;
+        // GetComponentInChildren<Glock>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene(2);
     }
 
 }
