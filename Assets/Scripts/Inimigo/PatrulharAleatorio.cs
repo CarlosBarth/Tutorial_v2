@@ -47,14 +47,9 @@ public class PatrulharAleatorio : MonoBehaviour
     public void Andar(Animator anim = null) 
     {
                 
-        if(agent) {
-            print("SD: " + agent.stoppingDistance);
-            print("RD: " + agent.remainingDistance);
-            print (tempo);
-            if (agent.isStopped) 
-            {
-                print("stoped");
-            }
+        if(agent) 
+        {
+            WaitForAnimation("PutTheDamnEgg", anim);
             if (agent.remainingDistance <= 0.11f || (tempo >= 6.0f))
             {
                 if (tempo <= 6.0f) 
@@ -79,6 +74,20 @@ public class PatrulharAleatorio : MonoBehaviour
             }
             Debug.DrawLine(transform.position, agent.destination, Color.magenta);
         }
+    }
+
+    IEnumerator WaitForAnimation(string animationName, Animator anim)
+    {
+        // print("iterator");
+        // Aguarda até que a animação esteja sendo reproduzida
+        while (!anim.GetCurrentAnimatorStateInfo(0).IsName(animationName))
+        {
+            yield return null;
+        }
+
+        // Agora, espera a animação terminar
+        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animationLength);
     }
 
     

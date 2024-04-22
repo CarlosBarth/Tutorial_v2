@@ -9,7 +9,7 @@ public class InimigoNewBoss : InimigoBase, ILevarDano
         return true;
     }
 
-    void Update()
+    protected override void FixedUpDate()
     {       
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("idle")) 
         {
@@ -22,6 +22,12 @@ public class InimigoNewBoss : InimigoBase, ILevarDano
 
         if (fov.podeVerPlayer) 
         {
+            if (!jahGrunhiu) 
+            {
+                jahGrunhiu = true;
+                audioSrc.clip = somRugido;
+                audioSrc.Play();
+            }
             VaiAtrasJogador();                
         } else 
         {

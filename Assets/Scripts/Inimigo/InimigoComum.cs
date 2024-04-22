@@ -5,42 +5,55 @@ using UnityEngine.AI;
 
 public class InimigoComum : InimigoBase, ILevarDano
 {
-      
+    public bool colocaOvos = false;
+
     public override bool IsBoss() 
     {
         return false;
     } 
 
     // Update is called once per frame
-    void Update()
+    protected override void FixedUpDate()
     {
+        WaitForAnimation("PutTheDamnEgg");
         tempoAcumulado += Time.deltaTime;
-        if (tempoAcumulado >= intervalo) {
+        if (tempoAcumulado >= intervalo && colocaOvos) {
             ColocarOvo(); // isso mesmo, um ovo!
             tempoAcumulado = 0f; // Resetar o contador
         }
-        OlharParaJogador(); 
-        VerificaVida();
+        base.FixedUpDate();
+        // OlharParaJogador(); 
+        // VerificaVida();
 
-        if (fov.podeVerPlayer) 
-        {
-            VaiAtrasJogador();
+        // if (fov.podeVerPlayer) 
+        // {
+        //     VaiAtrasJogador();
                         
-        } else 
-        {
-            anim.SetBool("pararAtaque", true);
-            CorrigirRigidSair();
-            agente.isStopped = false;
-            pal.Andar(anim);
+        // } else 
+        // {
+        //     anim.SetBool("pararAtaque", true);
+        //     CorrigirRigidSair();
+        //     agente.isStopped = false;
+        //     pal.Andar(anim);
             
-        }
+        // }
     }
     
-    void ColocarOvo() {
-        Debug.Log("Póhh");
-        WaitForAnimation("colocarOvo");
-        // Código para a ação aqui
-        Debug.Log("Póhh póóóh");
+    private void ColocarOvo() 
+    {
+        bool jahEstaColocandoOvo = anim.GetCurrentAnimatorStateInfo(0).IsName("PutTheDamnEgg"); 
+        if (!jahEstaColocandoOvo) 
+        {
+            anim.Play("PutTheDamnEgg");
+            agente.isStopped = true;
+            anim.SetBool("podeAndar", false);
+           
+            // Instancia o ovo na posição do NPC
+            Instantiate(eggPrefab, transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+           
+            agente.isStopped = false;
+            anim.SetBool("podeAndar", true);
+        }
     }
 
     IEnumerator WaitForAnimation(string animationName)
@@ -124,9 +137,10 @@ public class InimigoComum : InimigoBase, ILevarDano
         }
     }
 
-    protected virtual void Morrer() 
+    protected override void Morrer() 
     {
         base.Morrer();
+        print("dead");
         countEnemyTemple++;
         
         if (countEnemyTemple >= 1) 

@@ -518,6 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d676094790698478a5916b955be6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  campoDePontuacao: {fileID: 0}
 --- !u!114 &915579841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,7 +842,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: acbc8da48ae4e264aa1aed5ef15e4ee9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c500db033a9cfea41b3c2ea85702e004, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

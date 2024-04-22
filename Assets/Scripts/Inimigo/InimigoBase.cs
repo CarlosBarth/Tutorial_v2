@@ -26,9 +26,10 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
     public Text textoPontuacaoFinal;
 
     protected float tempoAcumulado = 0f;
-    protected float intervalo = 20f;
+    protected float intervalo = 10f;
     protected int countEnemyTemple = 0;
     protected MensagemTemporaria mensagemTemporaria;
+    public GameObject eggPrefab;
     
     public abstract bool IsBoss();
 
@@ -55,6 +56,16 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
 
         fov = GetComponent<FieldOfView>();
         pal = GetComponent<PatrulharAleatorio>();
+        if (textoPontuacao == null) 
+        {
+            textoPontuacao = GameObject.FindGameObjectWithTag("textoPontuacao").GetComponent<Text>();
+        }
+        BeginEvolve();
+    }
+
+    protected virtual void  BeginEvolve()
+    {
+        return;
     }
 
     protected void VerificaVida() 
@@ -69,7 +80,12 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
     // Update is called once per framessssss
     void Update()
     {       
-        anim.SetBool("andando", !agente.isStopped);
+        FixedUpDate();
+    }
+
+    protected virtual void FixedUpDate()
+    {
+        // anim.SetBool("andando", !agente.isStopped);
         if (!agente.enabled || anim.GetCurrentAnimatorStateInfo(0).IsName("roar")) 
         {
             anim.ResetTrigger("roar");
@@ -81,6 +97,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         // StartCoroutine(WaitForAnimation("hit"));
         if (fov.podeVerPlayer) 
         {
+            
             VaiAtrasJogador();
             // OlharParaJogador();
             // anim.SetTrigger("roar");
@@ -89,8 +106,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
             // {
             //     agente.isStopped = true;
             //     anim.Play("Mutant Roaring");
-            //     audioSrc.clip = somRugido;
-            //     audioSrc.Play();
+                
             //     anim.SetBool("jahRosnou", true);
             //     StartCoroutine(WaitForAnimation("Mutant Roaring"));
             // } else
@@ -227,7 +243,7 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
         this.enabled = false;
         // agente.enabled = false;
         // // fov.enabled = false;
-        GameObject.Destroy(this, 5);
+        Destroy(gameObject, 5);
         GameObject.Destroy(agente, 5);
                
     }
@@ -235,10 +251,17 @@ public abstract class InimigoBase : MonoBehaviour, ILevarDano
     protected void AtualizaPontuacao(int valor)
     {
         int pontuacaoAtual = int.Parse(textoPontuacao.text);
+        print(pontuacaoAtual);
+        print(valor);
         int pontuacao = Mathf.CeilToInt(Mathf.Clamp(pontuacaoAtual + valor, 0,9999));
         textoPontuacao.text = pontuacao.ToString();
         string descricaoPontos = "Sua Pontuação foi de: " +  pontuacao.ToString() + " Pontos.";
-        textoPontuacaoFinal.text = descricaoPontos;
+        print("pts: " + pontuacaoAtual);
+        if (textoPontuacaoFinal != null)
+        {
+            textoPontuacaoFinal.text = descricaoPontos;
+        }
+        
     }
 
     public void AbrirPortaBoss() 
