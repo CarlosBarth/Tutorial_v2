@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 404493aabc5e39e458626c49f7d9f831, type: 3}
       propertyPath: m_Name
-      value: TempleBoss Variant
+      value: TempleBoss
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 404493aabc5e39e458626c49f7d9f831, type: 3}
       propertyPath: m_TagString
@@ -207,6 +207,7 @@ MonoBehaviour:
   textoPontuacao: {fileID: 0}
   textoPontuacaoFinal: {fileID: 0}
   eggPrefab: {fileID: 0}
+  pista: {fileID: 712392490457837272, guid: 4751dcd0febbdc945b4fe12737decd5e, type: 3}
 --- !u!114 &475352734679761381
 MonoBehaviour:
   m_ObjectHideFlags: 0

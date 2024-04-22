@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InimigoNewBoss : InimigoBase, ILevarDano
 {
+    public GameObject pista;
     public override bool IsBoss() 
     {
         return true;
@@ -92,6 +94,12 @@ public class InimigoNewBoss : InimigoBase, ILevarDano
         GameObject.Destroy(this, 5);
         if (this.name == "TempleBoss") {
             AbrirPortas();
+            Instantiate(pista,  transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        } else if(this.name == "FinalBoss") 
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneManager.LoadScene(3);
         }
     }
 

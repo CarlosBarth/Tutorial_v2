@@ -55,6 +55,10 @@ public class MovimentarPersonagem : MonoBehaviour
         Agachar();       
     }
 
+    public int GetVida() {
+        return vida;
+    }
+
     void Agachar() {
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {

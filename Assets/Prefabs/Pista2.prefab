@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &712392490457837272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588848940664989873}
+  - component: {fileID: 4658486904802160650}
+  - component: {fileID: 1718526694126303878}
+  - component: {fileID: 2779066380160455710}
+  - component: {fileID: 5819624245399543166}
+  - component: {fileID: 5666948332450625429}
+  - component: {fileID: 546452179612299133}
+  m_Layer: 0
+  m_Name: Pista2
+  m_TagString: Pegar
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967248
+  m_IsActive: 1
+--- !u!4 &588848940664989873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712392490457837272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -40.53, y: 0.2664, z: 45.285713}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4658486904802160650
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712392490457837272}
+  m_Mesh: {fileID: 4300000, guid: 164a97a28b2c12449867f7c551ecf9b6, type: 3}
+--- !u!23 &1718526694126303878
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712392490457837272}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e23324bdfb1e4004cb69afb26f0c3a11, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2779066380160455710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712392490457837272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8707694, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 1
+  bakeKeys:
+  - {fileID: 4300000, guid: 164a97a28b2c12449867f7c551ecf9b6, type: 3}
+  bakeValues:
+  - data:
+    - {x: -0.73333335, y: 0.003921569, z: -0.67985797}
+    - {x: -0.66372687, y: 0.30618545, z: 0.68243474}
+    - {x: -0.65579176, y: 0.28654456, z: -0.69844776}
+    - {x: -0.7176471, y: -0.003921569, z: 0.69639593}
+    - {x: -0.6, y: -0.49803922, z: -0.62606466}
+    - {x: -0.66372687, y: -0.30618545, z: 0.68243474}
+    - {x: 0.105882354, y: -0.69411767, z: -0.712032}
+    - {x: -0.66372687, y: -0.30618545, z: 0.68243474}
+    - {x: -0.6, y: -0.49803922, z: -0.62606466}
+    - {x: 0.1251621, y: -0.6436994, z: 0.7549738}
+    - {x: 0.4670234, y: -0.4670234, z: 0.7508517}
+    - {x: 0.52156866, y: -0.52156866, z: -0.6752276}
+    - {x: 0.6411579, y: -0.11982452, z: 0.7579964}
+    - {x: 0.64343494, y: -0.09611471, z: -0.7594429}
+    - {x: 0.6349035, y: 0.12092357, z: -0.7630695}
+    - {x: 0.63803834, y: 0.12037029, z: 0.76053804}
+    - {x: 0.46404514, y: 0.46404514, z: 0.75453573}
+    - {x: 0.46104762, y: 0.46104762, z: -0.7582019}
+    - {x: 0.11982452, y: 0.6411579, z: 0.7579964}
+    - {x: 0.121484555, y: 0.63175315, z: -0.76559097}
+    - {x: -0.65579176, y: 0.28654456, z: -0.69844776}
+    - {x: -0.66372687, y: 0.30618545, z: 0.68243474}
+    - {x: 0.64343494, y: -0.09611471, z: -0.7594429}
+    - {x: 0.52156866, y: -0.52156866, z: -0.6752276}
+    - {x: 0.105882354, y: -0.69411767, z: -0.712032}
+    - {x: -0.050980393, y: 0.003921569, z: -0.998692}
+    - {x: 0.6349035, y: 0.12092357, z: -0.7630695}
+    - {x: -0.6, y: -0.49803922, z: -0.62606466}
+    - {x: 0.46104762, y: 0.46104762, z: -0.7582019}
+    - {x: -0.73333335, y: 0.003921569, z: -0.67985797}
+    - {x: 0.121484555, y: 0.63175315, z: -0.76559097}
+    - {x: -0.65579176, y: 0.28654456, z: -0.69844776}
+    - {x: -0.7176471, y: -0.003921569, z: 0.69639593}
+    - {x: -0.66372687, y: -0.30618545, z: 0.68243474}
+    - {x: 0.1251621, y: -0.6436994, z: 0.7549738}
+    - {x: -0.050980393, y: -0.003921569, z: 0.998692}
+    - {x: -0.66372687, y: 0.30618545, z: 0.68243474}
+    - {x: 0.4670234, y: -0.4670234, z: 0.7508517}
+    - {x: 0.11982452, y: 0.6411579, z: 0.7579964}
+    - {x: 0.6411579, y: -0.11982452, z: 0.7579964}
+    - {x: 0.46404514, y: 0.46404514, z: 0.75453573}
+    - {x: 0.63803834, y: 0.12037029, z: 0.76053804}
+--- !u!114 &5819624245399543166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712392490457837272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5746336f34e3944b015974ce9229f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: "\xC0 medida que o \xFAltimo sussurro do guardi\xE3o ca\xEDdo ecoa pelas
+    paredes ancestrais do templo, um pergaminho selado emerge das sombras. O texto,
+    embora gasto pelo tempo, revela uma verdade esquecida. 'Nos vales esquecidos,
+    onde os monges de outrora meditavam em sil\xEAncio, segredos sombrios aguardam
+    sob o manto da escurid\xE3o. Busque o antigo monast\xE9rio, escondido aos olhos
+    dos inocentes, pois apenas l\xE1 a pr\xF3xima chave se revelar\xE1.' Prepare-se,
+    pois cada passo te leva mais perto do abismo.\""
+  NomeProximaPista: FinalBoss
+--- !u!54 &5666948332450625429
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712392490457837272}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &546452179612299133
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712392490457837272}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.23917347, y: 0.054890692, z: 0.32278943}
+  m_Center: {x: -0.119581394, y: 0.0000000018626451, z: -0.16138901}

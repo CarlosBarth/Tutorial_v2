@@ -56,7 +56,7 @@ public class IdentificarObjetos : MonoBehaviour
                     print(hit.transform.gameObject.name);
                     objPegar = hit.transform.gameObject;
                     objAlvo = objPegar;
-                    // print("Pegar - " + objPegar.name);
+                    print("Pegar - " + objPegar.name);
 
                     textoTecla.color = new Color(51 / 255f, 1, 0);
                     textoMsg.color = textoTecla.color;

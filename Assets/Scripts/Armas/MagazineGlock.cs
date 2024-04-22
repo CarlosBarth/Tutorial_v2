@@ -7,6 +7,12 @@ public class MagazineGlock : MonoBehaviour, IPegavel
     public void Pegar()
     {
         Glock g = GameObject.FindWithTag("Arma").GetComponent<Glock>();
+        if(this.name == "box_ammo")
+        {
+            g.AddCarregador(99); 
+            return;   
+        }
+        
         g.AddCarregador();
     }
 
